@@ -86,3 +86,11 @@ It is important to define the VM sizes and OS images used:
 
 **Note:**  
 When connecting to the Windows VM, I encountered several issues due to a supposed certificate error. This problem occurs when the **Windows VM resource name does not match the computer name**. If they are not identical, FreeRDP (used for connecting from Linux to the Windows VM) will throw an error. To avoid this, the names must be the same.  
+Finally i got the same certification error,  so the problem is not completely related to the computers and resource name.  In order to solve this problem I change my windows OS to :
+
+![image](https://github.com/user-attachments/assets/6180cebd-3eca-41a3-8cab-2a3ddea988d6)
+
+And then i can connect again, also I modified the terraform code to allow the SSH connection by Username and Password, avoiding the use of .pem to insert manually private keys.
+  
+
+
