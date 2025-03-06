@@ -151,3 +151,8 @@ variable "vm_windows_admin_password" {
 
 
 
+variable "vm_linux_admin_password" {
+  description = "Password for the Linux VM admin user"
+  type        = string
+  sensitive   = true
+}
