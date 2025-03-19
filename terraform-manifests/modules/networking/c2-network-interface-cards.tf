@@ -2,8 +2,8 @@
 resource "azurerm_network_interface" "vmnic" {
   count               = 2
   name                = "${var.vmnic_name}-${count.index}"
-  location            = azurerm_resource_group.vms-rs.location
-  resource_group_name = azurerm_resource_group.vms-rs.name
+  location            = var.location_networking
+  resource_group_name = var.resource_group_name_nw
 
   ip_configuration {
     name                          = "internal"
@@ -16,8 +16,8 @@ resource "azurerm_network_interface" "vmnic" {
 # Create Network Security Group and Rule
 resource "azurerm_network_security_group" "vms-nsg-linux" {
   name                = "${var.vm_nsg_name}-linux"
-  location            = azurerm_resource_group.vms-rs.location
-  resource_group_name = azurerm_resource_group.vms-rs.name
+  location            = var.location_networking
+  resource_group_name = var.resource_group_name_nw
 
   security_rule {
     name                       = "SSH"
@@ -36,8 +36,8 @@ resource "azurerm_network_security_group" "vms-nsg-linux" {
 
 resource "azurerm_network_security_group" "vms-nsg-windows" {
   name                = "${var.vm_nsg_name}-windows"
-  location            = azurerm_resource_group.vms-rs.location
-  resource_group_name = azurerm_resource_group.vms-rs.name
+  location            = var.location_networking
+  resource_group_name = var.resource_group_name_nw
 
   security_rule {
     name                       = "AllowRDP"
