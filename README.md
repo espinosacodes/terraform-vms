@@ -92,5 +92,10 @@ Finally i got the same certification error,  so the problem is not completely re
 
 And then i can connect again, also I modified the terraform code to allow the SSH connection by Username and Password, avoiding the use of .pem to insert manually private keys.
   
+# Modules implementation on modules branch: 
+
+In orden to create a more reusable code, we define the vm and networking resource creation through modules where i can easily define each parameter that is mapped on variables.tf. It's worth to say, that we must define amn output file in order to  use information from one module to other, for example when we need to use the nic id from networking module to VM's modules. Also, if we don't link a resource from other Terraform apply a parallel operation where one resource that is needed from other is not up to be used in correct time.
+
+![image](https://github.com/user-attachments/assets/a756fdb4-76af-4c2e-a988-637625bee1de)
 
 
