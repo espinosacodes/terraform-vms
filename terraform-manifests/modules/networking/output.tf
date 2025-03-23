@@ -5,11 +5,11 @@ output "subnet_id" {
 
 output "public_ips" {
   description = "Lista de direcciones IP públicas"
-  value       = azurerm_public_ip.vms-publicip[*].id
+  value       = azurerm_public_ip.vms-publicip.ip_address
 }
 
 output "network_interface_ids" {
   description = "Lista de IDs de interfaces de red"
-  value       = azurerm_network_interface.vmnic[*].id
+  value       = [azurerm_network_interface.vmnic.id]
 }
 

@@ -19,12 +19,11 @@ resource "azurerm_public_ip" "vms-publicip" {
 
   # We use count here to create multiple public IP addresses;
   # Each public ip addres must have a unique domain name label and unique name
-  count               = 2
-  name                = "${var.public_ip_name}-${count.index}"
+  name                = "${var.public_ip_name}"
   resource_group_name = var.resource_group_name_nw
   location            = var.location_networking
   allocation_method   = "Static"
-  domain_name_label   = "${var.domain_name_label}-${count.index}-${var.random_string}"
+  domain_name_label   = "${var.domain_name_label}-${var.random_string}"
   tags = {
     environment = "Dev"
   }

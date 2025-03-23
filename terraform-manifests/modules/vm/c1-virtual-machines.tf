@@ -26,33 +26,3 @@ resource "azurerm_linux_virtual_machine" "linuxvm" {
 
 }
 
-#Resource: Windows Virtual Machine 
-
-resource "azurerm_windows_virtual_machine" "windows_vm" {
-  name = var.vm_windows_name
-  #If we don't  set the computer_name, may occurr a certification problem when connecting with the windows vm using RDP.
-  computer_name         = var.vm_windows_computer_name
-  resource_group_name   = var.resource_group_name
-  location              = var.location
-  size                  = var.vm_windows_size
-  admin_username        = var.vm_windows_admin_username
-  admin_password        = var.vm_windows_admin_password
-  network_interface_ids = [var.network_interface_ids_from_networking[1]]
-
-  os_disk {
-    name                 = "windowsosdisk"
-    caching              = "ReadWrite"
-    storage_account_type = "Standard_LRS"
-  }
-
-  source_image_reference {
-    publisher = "MicrosoftWindowsDesktop"
-    offer     = "windows-11"
-    sku       = "win11-22h2-pro"
-    version   = "latest"
-  }
-
-
-  # Enable automatic updates.
-  patch_mode = "AutomaticByOS"
-}

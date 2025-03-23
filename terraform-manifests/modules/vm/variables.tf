@@ -33,33 +33,6 @@ variable "vm_linux_admin_password" {
   type        = string
   sensitive   = true
 }
-
-variable "vm_windows_name" {
-  description = "Nombre de la máquina virtual Windows"
-  type        = string
-}
-
-variable "vm_windows_computer_name" {
-  description = "Nombre del equipo en la VM Windows"
-  type        = string
-}
-
-variable "vm_windows_size" {
-  description = "Tamaño de la VM Windows"
-  type        = string
-}
-
-variable "vm_windows_admin_username" {
-  description = "Usuario administrador de la VM Windows"
-  type        = string
-}
-
-variable "vm_windows_admin_password" {
-  description = "Contraseña del administrador de la VM Windows"
-  type        = string
-  sensitive   = true
-}
-
 variable "network_interface_ids_from_networking" {
   description = "Lista de IDs de las interfaces de red"
   type        = list(string)

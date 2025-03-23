@@ -28,6 +28,7 @@ resource "random_string" "myrandom" {
 }
 
 # Resource-1: Azure Resource Group
+
 resource "azurerm_resource_group" "vms-rs" {
   name     = var.rs-name
   location = var.rs-location
@@ -42,11 +43,6 @@ module "vm" {
   vm_linux_size                         = "Standard_DS1_v2"
   vm_linux_admin_username               = "azureuser"
   vm_linux_admin_password               = "Segura123"
-  vm_windows_name                       = "windowsvm-1"
-  vm_windows_computer_name              = "windowsvm-1"
-  vm_windows_size                       = "Standard_B1s"
-  vm_windows_admin_username             = "adminuser"
-  vm_windows_admin_password             = "adminUser1#1"
   network_interface_ids_from_networking = module.networking.network_interface_ids
 }
 
