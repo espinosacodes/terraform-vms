@@ -12,15 +12,15 @@ resource "azurerm_linux_virtual_machine" "linuxvm" {
   network_interface_ids           = [var.network_interface_ids_from_networking[0]]
 
   os_disk {
-    name                 = "osdisk"
+    name                 = "windowsosdisk"
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
 
   source_image_reference {
-    publisher = "Canonical"
-    offer     = "0001-com-ubuntu-server-jammy"
-    sku       = "22_04-lts-gen2"
+    publisher = "MicrosoftWindowsServer"
+    offer     = "WindowsServer"
+    sku       = "2022-datacenter-azure-edition"
     version   = "latest"
   }
 
