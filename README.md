@@ -137,6 +137,10 @@ In this case, I'm using the Universidad Icesi tenant with the Azure for Students
 First config the `terraform.tfvars` file with your Azure credentials and other necessary variables. This file is used to set the values for the variables defined in the Terraform configuration files.
 that is ignored by git, so you can create your own file with the same name and set the values for the variables.  
 ```bash
+cd terraform-manifests
+```
+
+```bash
 touch terraform.tfvars
 ```
 
@@ -149,10 +153,6 @@ user = "azureuser"
 ```
 
 Then, initialize the Terraform working directory:
-
-```bash
-
-I created a deployment script `creation.sh` that automates the Terraform deployment process:
 
 ```bash
 chmod +x creation.sh
