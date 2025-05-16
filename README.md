@@ -161,5 +161,46 @@ chmod +x creation.sh
 
 This script handles the necessary Terraform commands to initialize, plan, and apply the configuration to create the virtual machines in Azure.
 
+then connect to the VMs using SSH for Linux and RDP for Windows.  
+```bash
+ssh azureuser@<linux_vm_public_ip>
+```
 
+then install git and config the git user
+```bash
+sudo yum install git
+git config --global user.name "espinosa"
+git config --global user.email "santiagoespinosagiraldo@gmail.com"
+```
+config ssh key
+```bash
+ssh-keygen -t ed25519 -C "santiagoespinosagiraldo1@gmail.com"
+```
+```bash
+cat ~/.ssh/id_ed25519.pub
+```
+copy the public key and add it to your github account, then add the private key to the ssh agent
+
+
+
+then clone the repository
+```bash 
+git clone git@github.com:2025-1-PI1-G1/202501-proyecto-equipo5.git
+```
+```bash
+cd 202501-proyecto-equipo5
+```
+
+exit from the VM
+```bash
+exit
+```
+
+we need to destroy the resources created by terraform, for that we can use the command
+```bash
+az vm deallocate --resource-group integrador1new --name linuxvm-1
+```
+```bash
+terraform destroy -auto-approve
+```
 

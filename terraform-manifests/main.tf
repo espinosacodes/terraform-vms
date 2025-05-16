@@ -40,7 +40,7 @@ module "vm" {
   resource_group_name                   = azurerm_resource_group.vms-rs.name
   vm_linux_name                         = "linuxvm-1"
   vm_linux_computer_name                = "linuxvm-1"
-  vm_linux_size                         = "Standard_DS1_v2"
+  vm_linux_size                         = "Standard_B1s" # Change to an available size, e.g., Standard_B1s
   vm_linux_admin_username               = "azureuser"
   vm_linux_admin_password               = "Segura123"
   network_interface_ids_from_networking = module.networking.network_interface_ids

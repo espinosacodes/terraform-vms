@@ -1,6 +1,1 @@
-[33m╷[0m[0m
-[33m│[0m [0m[1m[33mWarning: [0m[0m[1mNo outputs found[0m
-[33m│[0m [0m
-[33m│[0m [0m[0mThe state file either has no outputs defined, or all the defined outputs are empty. Please define an output in your configuration with the `output` keyword and run `terraform
-[33m│[0m [0mrefresh` for it to become available. If you are using interpolation, please verify the interpolated value is not empty. You can use the `terraform console` command to assist.
-[33m╵[0m[0m
+linux_vm_ip = "172.190.167.234"
