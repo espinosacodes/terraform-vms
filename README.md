@@ -91,6 +91,116 @@ Finally i got the same certification error,  so the problem is not completely re
 ![image](https://github.com/user-attachments/assets/6180cebd-3eca-41a3-8cab-2a3ddea988d6)
 
 And then i can connect again, also I modified the terraform code to allow the SSH connection by Username and Password, avoiding the use of .pem to insert manually private keys.
-  
 
+## Terraform State and Azure Setup
+
+### Terraform State File
+
+The `terraform.tfstate` file is automatically created when you run `terraform apply` for the first time. This file:
+
+- Tracks the current state of your deployed infrastructure
+- Maps real-world resources to your configuration
+- Stores metadata about your resource configuration
+- Is critical for Terraform to understand what has been deployed and what needs to change
+
+The state file is located in the terraform-manifests directory and should be treated with care as it contains sensitive information.
+
+### Azure Authentication Process
+
+To deploy resources to Azure using Terraform, you first need to authenticate using the Azure CLI:
+
+```bash
+az login
+```
+
+This command opens a web browser for authentication. If the browser fails to open (as it did in my case with Wayland display), it falls back to X11:
+
+```
+A web browser has been opened at https://login.microsoftonline.com/organizations/oauth2/v2.0/authorize. 
+Please continue the login in the web browser. If no web browser is available or if the web browser 
+fails to open, use device code flow with `az login --use-device-code`.
+Error: Failed to open Wayland display, fallback to X11. WAYLAND_DISPLAY='wayland-0' DISPLAY=':0'
+```
+
+After authentication, you'll see your available tenants and subscriptions:
+
+```
+No     Subscription name    Subscription ID                       Tenant
+-----  -------------------  ------------------------------------  -----------------
+[1] *  Azure for Students   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  Universidad Icesi
+```
+
+In this case, I'm using the Universidad Icesi tenant with the Azure for Students subscription. Once authenticated, Terraform can use these credentials to deploy resources to your Azure subscription.
+
+### Deployment Script
+
+First config the `terraform.tfvars` file with your Azure credentials and other necessary variables. This file is used to set the values for the variables defined in the Terraform configuration files.
+that is ignored by git, so you can create your own file with the same name and set the values for the variables.  
+```bash
+cd terraform-manifests
+```
+
+```bash
+touch terraform.tfvars
+```
+
+```
+my-subscription_id = ""
+rs-location = "eastus"
+rs-name = ""
+password = ""
+user = "azureuser"
+```
+
+Then, initialize the Terraform working directory:
+
+```bash
+chmod +x creation.sh
+./creation.sh
+```
+
+This script handles the necessary Terraform commands to initialize, plan, and apply the configuration to create the virtual machines in Azure.
+
+then connect to the VMs using SSH for Linux and RDP for Windows.  
+```bash
+ssh azureuser@<linux_vm_public_ip>
+```
+
+then install git and config the git user
+```bash
+sudo yum install git
+git config --global user.name "espinosa"
+git config --global user.email "santiagoespinosagiraldo@gmail.com"
+```
+config ssh key
+```bash
+ssh-keygen -t ed25519 -C "santiagoespinosagiraldo1@gmail.com"
+```
+```bash
+cat ~/.ssh/id_ed25519.pub
+```
+copy the public key and add it to your github account, then add the private key to the ssh agent
+
+
+
+then clone the repository
+```bash 
+git clone git@github.com:2025-1-PI1-G1/202501-proyecto-equipo5.git
+```
+```bash
+cd 202501-proyecto-equipo5
+```
+
+exit from the VM
+```bash
+exit
+```
+
+we need to destroy the resources created by terraform, for that we can use the command
+```bash
+az vm deallocate --resource-group integrador1new --name linuxvm-1
+```
+```bash
+terraform destroy -auto-approve
+```
 
