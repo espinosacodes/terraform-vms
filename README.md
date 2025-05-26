@@ -168,7 +168,7 @@ ssh azureuser@<linux_vm_public_ip>
 
 then install git and config the git user
 ```bash
-sudo yum install git
+sudo apt install git
 git config --global user.name "espinosa"
 git config --global user.email "santiagoespinosagiraldo@gmail.com"
 ```
